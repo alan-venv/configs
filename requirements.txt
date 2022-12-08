@@ -1,3 +1,27 @@
-nitrogen
-i3lock
-archlinux-wallpaper
+{
+  "arch":
+    {
+      "nitrogen",
+      "i3lock",
+      "archlinux-wallpaper",
+      "git",
+      "vim",
+      "i3lock",
+      "python-pip",
+      "neofetch",
+      "rofi",
+      "flatpak"
+    },
+  "AUR":
+    {
+      "yay",
+      "nordvpn-bin"
+    },
+  "flatpak":
+    {
+      "firefox",
+      "onlyoffice",
+      "okular"
+    }
+}
+

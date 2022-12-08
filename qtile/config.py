@@ -46,7 +46,7 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "s", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "s", lazy.spawn("rofi -show drun")),
 ]
 
 groups = [Group(i) for i in "12345"]
@@ -92,9 +92,9 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                #widget.CurrentLayout(),
+                # widget.CurrentLayout(),
                 widget.GroupBox(),
-                widget.Prompt(),
+                # widget.Prompt(),
                 widget.WindowName(format=''),
                 widget.Chord(
                     chords_colors={
