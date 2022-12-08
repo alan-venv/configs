@@ -1,0 +1,3 @@
+nitrogen
+i3lock
+archlinux-wallpaper
