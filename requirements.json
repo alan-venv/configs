@@ -1,7 +1,7 @@
 {
-	"arch":
-		{
-			"git",
+  "arch":
+    {
+      "git",
       "vim",
       "i3lock",
       "python-pip",
