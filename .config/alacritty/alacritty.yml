@@ -1,0 +1,6 @@
+window:
+    opacity: 0.3
+
+cursor:
+    style:
+        shape: Beam

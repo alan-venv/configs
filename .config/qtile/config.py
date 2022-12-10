@@ -11,43 +11,37 @@ terminal = guess_terminal()
 
 @hook.subscribe.startup_once
 def autostart():
-    # subprocess.Popen(["picom"])
-    subprocess.Popen(["nitrogen", "--restore"])
+    # subprocess.Popen(["nitrogen", "--restore"])  
     # subprocess.Popen(["setxkbmap", "-model", "abnt2", "-layout", "br"])
+    subprocess.Popen(["picom"])
+    subprocess.Popen(["feh" , "--bg-fill", "/usr/share/backgrounds/archlinux/awesome.png"])
 
 keys = [
-    Key([mod], "l", lazy.spawn("i3lock -c '#202020'")),
+    # === Move focus
+    Key([mod], "Left", lazy.layout.left()),
+    Key([mod], "Right", lazy.layout.right()),
+    Key([mod], "Down", lazy.layout.down()),
+    Key([mod], "Up", lazy.layout.up()),
+    # === Move window
+    Key([mod, "shift"], "Left", lazy.layout.shuffle_left()),
+    Key([mod, "shift"], "Right", lazy.layout.shuffle_right()),
+    Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "Up", lazy.layout.shuffle_up()),
+    # === Grow window
+    Key([mod, "control"], "Left", lazy.layout.grow_left()),
+    Key([mod, "control"], "Right", lazy.layout.grow_right()),
+    Key([mod, "control"], "Down", lazy.layout.grow_down()),
+    Key([mod, "control"], "Up", lazy.layout.grow_up()),
+    # === Others
+    Key([mod], "Return", lazy.spawn(terminal)),
+    Key([mod], "Tab", lazy.next_layout()),
+    Key([mod], "l", lazy.spawn("i3lock -c '#000000'")),
     Key([mod], "p", lazy.spawn("poweroff")),
-    # === 
-    Key([mod], "Left", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
-    # === 
-    Key([mod, "shift"], "Left", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "Right", lazy.layout.shuffle_right(), desc="Move window to the right"),
-    Key([mod, "shift"], "Down", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, "shift"], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
-    # === 
-    Key([mod, "control"], "Left", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "Right", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod, "control"], "Down", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "Up", lazy.layout.grow_up(), desc="Grow window up"),
-    # === 
-    Key(
-        [mod, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack",
-    ),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "s", lazy.spawn("rofi -show drun")),
-]
+    Key([mod], "q", lazy.window.kill()),
+    Key([mod, "control"], "r", lazy.reload_config()),
+    Key([mod, "control"], "q", lazy.shutdown()),
+   ]
 
 groups = [Group(i) for i in "12345"]
 
@@ -92,18 +86,9 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                # widget.CurrentLayout(),
                 widget.GroupBox(),
-                # widget.Prompt(),
-                widget.WindowName(format=''),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
+                widget.WindowName(format=''), 
                 widget.Systray(),
-                # widget.TextBox("Lock", foreground="00ff00", mouse_callbacks = {'Button1': lazy.spawn(lockcommand)}),
                 widget.CryptoTicker(format='{crypto}: ${amount:,.2f}', foreground="00ff00"),
                 widget.TextBox("-"),
                 widget.PulseVolume(fmt="Vol. {}", foreground="#00ff00"),
@@ -132,7 +117,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(

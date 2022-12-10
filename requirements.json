@@ -1,25 +1,26 @@
 {
-  "arch":
-    {
-      "nitrogen",
-      "i3lock",
-      "archlinux-wallpaper",
-      "git",
+	"arch":
+		{
+			"git",
       "vim",
       "i3lock",
       "python-pip",
+      "archlinux-wallpaper",
       "neofetch",
       "rofi",
-      "flatpak"
+      "flatpak",
+      "firefox",
+      "feh",
+      "imagemagick"
     },
   "AUR":
     {
       "yay",
+      "ly",
       "nordvpn-bin"
     },
   "flatpak":
     {
-      "firefox",
       "onlyoffice",
       "okular"
     }
